@@ -1,0 +1,64 @@
+
+
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+    background: black !important; /*by kemo*/
+}
+
+/*start kemo styles*/
+* {
+    font-family: "Cabin Sketch", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+}
+
+/** {
+    font-family: "Dancing Script", cursive;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+}*/
+#previewDiv {
+    max-width: 500px;
+    height: auto;
+    overflow:hidden;
+}
+
+#PreviewImg {
+    width: 100%;
+    height:fit-content;
+    object-fit:contain;
+    border-radius: 22px;
+    border: black 3px solid;
+    box-sizing:content-box;
+}
+
+.swal2-popup {
+    border-radius: 30px;
+}
+#swal2-html-container {
+    font-weight: 800;
+}
+.swal2-cancel {
+    margin-right: 20px;
+}
+/*end kemo styles*/

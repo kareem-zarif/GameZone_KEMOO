@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Game>
+
+@{
+    ViewData["Title"] = "Games";
+}
+
+<a class="btn btn-dark btn-lg" asp-controller="Games" asp-action="Create">
+    <i class="bi bi-plus-circle"></i>
+    AddGame
+</a>
+
+@if (!Model.Any())
+{
+    <div class="alert  alert-warning">
+        <h4 class="alert-heading">NO GAMES!</h4>
+        <p class="mb-0">Not Games Added Yet.</p>
+    </div>
+}
+else
+{
+    <div class="mt-5">
+        <table class="table  bg-transparent ">
+            <tbody>
+                @foreach (var comingGame in Model)
+                {
+                    <tr class="border-2 border-white ">
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <div class="pe-5">
+                                    <img src="@($"{FileSettings.ImgPathAfterRoot}/{comingGame.CoverName}")" alt="@($"{comingGame.name} Cover Picture")" style="max-width:90px;border-radius:8px" />
+                                </div>
+                                <div>
+                                    <div class="d-flex flex-column justify-content-center ">
+                                        <h4 class="text-white">@comingGame.name</h4>
+                                        <p class=" text-black bg-white rounded-5 text-center px-0">
+                                            @comingGame.Category.name </p >
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="align-middle">
+                            <div class="d-flex justify-content-end ">
+                                <a class="btn btn-info rounded-3 me-3" asp-action="Edit" asp-route-id="@comingGame.id">
+                                <i class="bi bi-pencil text-white"></i>
+                                </a><a href="javascript:;" class="btn btn-danger rounded-3 custom-js-delete" data-id="@comingGame.id">
+                                <i class="bi bi-trash text-white"></i>
+                            </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+} 
+
+@section Scripts {
+    <script src="~/js/gamecl-indexac-del.js" asp-append-version="true"></script>
+}

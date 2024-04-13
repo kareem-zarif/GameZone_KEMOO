@@ -1,0 +1,48 @@
+﻿@* to receive Games from GamesController *@
+@model IEnumerable<Game>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@* to check reteriving games form DB *@
+@* @foreach(var game in Model)
+{
+    <p>@game.name</p>
+} *@
+
+
+@* alert if DB is empty *@
+@if (!Model.Any())
+{
+    <div class="alert  alert-warning">
+        <h4 class="alert-heading">NO GAMES!</h4>
+        <p class="mb-0">Not Games Added Yet.</p>
+    </div>
+}
+else
+{
+    <div class="row mt-5">
+        @foreach (var comingGame in Model)
+        {
+            <div class="col-lg-4 col-md-6">
+                <a class="card border-dark mb-5 rounded-4 overflow-hidden text-decoration-none" asp-controller="Games" asp-action="Details" asp-route-id="@comingGame.id">
+                    <div class="card-body" style="background-image:url(@($"{FileSettings.ImgPathAfterRoot}/{comingGame.CoverName}")); background-size:cover; background-position:center; height:400px;">
+                        <div class="h-100 d-flex align-items-end">
+                            <span class="badge bg-black fs-5 rounded-5">@comingGame.Category.name</span>
+                        </div>
+                    </div>
+                    <div class="card-footer  d-flex justify-content-between align-items-center">
+                        <h4 class="fw-bold">@comingGame.name</h4>
+                        <div>
+                        @foreach(var gameDevice in comingGame.GameDevices)
+                        {
+                            <i class="@gameDevice.Device.IconName ms-2 fs-4"></i>
+                            }
+                        </div>
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+    }

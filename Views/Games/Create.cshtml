@@ -1,0 +1,72 @@
+﻿@* link view to uts viewModel*@
+@model CreateGameFormViewModel;
+
+@{
+    ViewData["Title"] = "Add Game";
+}
+
+<h5 style="font-weight:600">
+    <i class="bi bi-plus-square-dotted"></i>
+    Add New Game
+</h5>
+
+@* enctype="multipart/form-data" => to allow post imgs *@
+<form asp-controller="Games" enctype="multipart/form-data">
+    <div class="row d-flex justify-content-between">
+        <div class="col-md-6">
+            <div>
+                <label asp-for="name" class="form-label mt-4"></label>
+                <input asp-for=name type="text" class="form-control" placeholder="Enter Name">
+                <span asp-validation-for="name" class="text-danger"></span>
+            </div>
+
+            <div>
+                <label asp-for="CategoryId" class="form-label mt-4"></label>
+                <select asp-for="CategoryId" class="form-control" asp-items="Model.Categories" data-placeholder="select a Category">
+                    <option value=""></option>
+                </select>
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
+            </div>
+
+            <div>
+                <label asp-for="SelectedDevices" class="form-label mt-4"></label>
+                <select asp-for="SelectedDevices" class="form-control" asp-items="Model.Devices" data-placeholder="select supported Devices">
+                    <option></option>
+                </select >
+                <span asp-validation-for="SelectedDevices" class="text-danger"></span>
+            </div>
+
+            <div>
+                <label asp-for="Description" class="form-label mt-4"></label>
+                <textarea asp-for="Description" class="form-control" rows="2" placeholder="Briefly write a summary of your game"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div>
+                <label asp-for="Cover" class="form-label mt-4"></label>
+                <input asp-for="Cover" class="form-control" type="file"
+                       data-rule-extension="@FileSettings.AllowedExyensions.Replace(".",string.Empty)"
+                       data-msg-extension="Not Allowed Extensioon"
+                       data-rule-MaxFileSizeInBytes="@FileSettings.MaxFileSizeinByte"
+                       data-msg-MaxFileSizeInBytes="File Size More Than Allowed : @FileSettings.MaxFileSizeInMBs MB">
+                <small class="form-text text-muted">allowed Extensions :@FileSettings.AllowedExyensions ,With Max Size: @FileSettings.MaxFileSizeInMBs MB.</small>
+                <span asp-validation-for="Cover" class="text-danger d-block "></span>
+            </div>
+
+            <button type="submit" class="btn btn-dark mt-4">Save</button>
+        </div>
+
+        @* preview *@
+        <div id="previewDiv" class="col-md-6 ">
+            <img id="PreviewImg" class="d-none  mt-3 " alt="Preview_Img" />
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    @* kemo=> concept concerns == writing your code in fiels and map to which you need to use *@
+    @* kemo=> when add js or css files => must use asp-append-version="true" == any change happen in origin reeflects auto in your instances*@
+    <script src="~/js/filesize-validator.js" asp-append-version="true"></script>
+    <script src="~/js/game-form-imgpreview.js" asp-append-version="true"></script>
+}
